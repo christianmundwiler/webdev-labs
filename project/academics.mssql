@@ -1,0 +1,32 @@
+/*****************************************
+* Create the academics database
+*****************************************/
+-- create and select the database
+DROP DATABASE IF EXISTS academics;
+CREATE DATABASE academics;
+USE academics;
+
+-- create tables
+CREATE TABLE IF NOT EXISTS Users (
+    ID              INT(11)         NOT NULL AUTO_INCREMENT,
+    FIRST_NAME      VARCHAR(255)    NOT NULL DEFAULT '0',
+    LAST_NAME       VARCHAR(255)    NOT NULL DEFAULT '0',
+    EMAIL           VARCHAR(50)     NOT NULL,
+    PASSWORD        VARCHAR(255)    NOT NULL DEFAULT '0',
+    CREATED			DATETIME        NOT NULL,
+	UPDATED			DATETIME		NOT NULL,
+    PRIMARY KEY (ID)
+)
+COLLATE='latin1_swedish_ci'
+AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS Course (
+    COURSE_ID       INT             NOT NULL AUTO_INCREMENT,
+    USER_ID         INT             NOT NULL,
+    TITLE           VARCHAR(100)    NOT NULL,
+    PROFESSOR       VARCHAR(50)     NOT NULL,
+    SEMESTER        VARCHAR(50)     NOT NULL,
+    YEAR_COMPLETED  YEAR            NOT NULL,
+    GRADE           VARCHAR(5)      NOT NULL,
+    PRIMARY KEY (COURSE_ID)
+);

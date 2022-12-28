@@ -1,0 +1,52 @@
+/*****************************************
+* Create the payroll database
+*****************************************/
+-- create and select the database
+DROP DATABASE IF EXISTS payroll;
+CREATE DATABASE payroll;
+USE payroll;
+
+-- create tables
+CREATE TABLE Employee (
+    EMP_NUM         CHAR(3)         NOT NULL,
+    EMP_LNAME       VARCHAR(255)    NOT NULL,
+    EMP_FNAME       VARCHAR(255)    NOT NULL,
+    EMP_INITIAL     CHAR(1),
+    EMP_HIREDATE    DATE            NOT NULL,
+    JOB_CODE        CHAR(3)         NOT NULL,
+    PRIMARY KEY (EMP_NUM)
+);
+
+CREATE TABLE Job (
+    JOB_CODE        CHAR(3)         NOT NULL,
+    JOB_DESCRIPTION VARCHAR(255)    NOT NULL,
+    JOB_CHARGE_HOUR DECIMAL(6,2)    NOT NULL,
+    PRIMARY KEY (JOB_CODE)
+);
+
+INSERT INTO Job VALUES
+('500', 'Programmer', '35.75'),
+('501', 'Analyst', '96.75'),
+('502', 'Database Designer', '125.00'),
+('503', 'Electrical Engineer', '84.50'),
+('504', 'Mechanical Engineer', '67.90'),
+('505', 'Civil Engineer', '55.78'),
+('506', 'Clerical Support', '26.87'),
+('507', 'DSS Analyst', '45.95'),
+('508', 'Application Designer', '48.10'),
+('509', 'Bio Technician', '34.55'),
+('510', 'General Support', '18.36');
+
+
+INSERT INTO Employee VALUES
+('101', 'News', 'John', 'G', '2000-11-8', '502'),
+('102', 'Senior', 'David', 'H', '1989-7-12', '501'),
+('103', 'Arbough', 'June', 'E', '1996-12-1', '503');
+
+CREATE USER IF NOT EXISTS 'employee_manager'@'localhost'
+IDENTIFIED BY 'pa55word';
+
+-- grant privleges to the manager
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON * 
+TO 'employee_manager'@'localhost';
